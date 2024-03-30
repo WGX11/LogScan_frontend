@@ -1,0 +1,79 @@
+.breathing-light {
+  width: 100px;
+  height: 100px;
+  background-color: rgba(255, 0, 0, 0.5); /* 初始透明度 */
+  border-radius: 50%;
+  animation: breathe 3s infinite ease-in-out;
+  position: relative;
+}
+
+/* 动画同时包括背景色和光晕效果的透明度变化 */
+@keyframes breathe{
+  0%, 100% {
+    box-shadow: 0 0 20px 10px rgba(255, 0, 0, 0.5);
+    background-color: rgba(243, 49, 49, 0.5); /* 与光晕同步 */
+  }
+  50% {
+    box-shadow: 0 0 40px 20px rgba(255, 0, 0, 0.2);
+    background-color: rgba(247, 27, 27, 0.8); /* 中心和光晕同时变得更透明 */
+  }
+}
+
+
+.app_breathing_light{
+  width:100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+.span_breathting_light{
+  width: 60px;
+  height: 60px;
+  margin: 40px;
+  border-radius: 10%;
+}
+.red{
+  animation: just1 2s ease-in-out infinite alternate;
+}
+.green{
+  animation: just2 4s ease-in-out infinite alternate;
+}
+.blue{
+  animation: just3 1s ease-in-out infinite alternate;
+}
+@keyframes just1{
+  0%{
+    border: 5px solid rgba(255,0,0,0);
+    box-shadow: 0 0 0 rgba(255,0,0,0),0 0 0 rgba(255,0,0,0) inset;
+  }
+  100%{
+    border: 5px solid rgba(255,0,0,1);
+    box-shadow: 0 0 70px rgba(255,0,0,0.7),0 0 15px rgba(255,0,0,0.5) inset;
+  }
+}
+@keyframes just2{
+  0%{
+    border: 5px out rgba(0,255,0,0);
+    border-width: 5px;
+    background-color: rgba(0,255,0,0.4);
+    box-shadow: 0 0 0 rgba(0,255,0,0),0 0 0 rgba(0,255,0,0) inset;
+  }
+  
+  100%{
+    border: 5px out rgba(0,255,0,1);
+    background-color: rgba(0,255,0,1);
+    box-shadow: 0 0 70px rgba(0,255,0,0.7),0 0 15px rgba(0,255,0,0.5) inset;
+  }
+}
+@keyframes just3{
+  0%{
+    border: 5px solid rgba(0,0,255,0);
+    box-shadow: 0 0 0 rgba(0,0,255,0),0 0 0 rgba(0,0,255,0) inset;
+  }
+  100%{
+    border: 5px solid rgb(255, 251, 0);
+    box-shadow: 0 0 70px rgba(255,251, 0,0.7),0 0 15px rgba(255,251,0,0.5) inset;
+  }
+}
