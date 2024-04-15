@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
-import { Modal, DatePicker, Button, Tabs, Tooltip} from 'antd';
-import { FieldTimeOutlined, ClockCircleOutlined, ArrowRightOutlined } from '@ant-design/icons';
-import { Collapse, Input, Typography, Select, Badge, Card, Space, Switch} from 'antd';
+import { Modal, DatePicker, Button, Tabs, Tooltip,  Dropdown, Space} from 'antd';
+import { FieldTimeOutlined, ClockCircleOutlined, ArrowRightOutlined, DownOutlined } from '@ant-design/icons';
+import { Collapse, Input, Typography, Select, Badge, Card, Switch} from 'antd';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 import './TimeSelect.css';
 import LogContext from '../pages/SearchPage/LogContext';
-import { parseISO } from 'date-fns';
 import { formatISO } from 'date-fns';
 
 dayjs.locale('zh-cn');
@@ -68,7 +67,7 @@ const TimeSelect = () => {
           <Button type="primary" onClick={showModal} icon={<FieldTimeOutlined />} style={{height: '50px'}}>
             选择时间
           </Button>
-          <div style={{marginLeft:'50px', height:'140px', width:'400px'}} onClick={showModal}>
+          <div style={{marginLeft:'50px', height:'140px', width:'450px'}} onClick={showModal}>
             <Badge.Ribbon text="Time">
               <Card title="时间范围" size="small" >
                 <div className='time-select-write' >
@@ -90,7 +89,7 @@ const TimeSelect = () => {
               </Card>
             </Badge.Ribbon>
           </div>
-          <div style={{marginLeft:'400px'}}>
+          <div style={{marginLeft:'200px'}}>
             <Update/>
           </div>
         </div>
@@ -280,40 +279,137 @@ const RelativePicker = (props) => {
 };
 
 const Update = () => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
+  const {setNotification} = useContext(LogContext);
+  const { updateTimeErrorCount, updateTimeWarnCount, updateTimeNormalCount, } = useContext(LogContext);
   return (
     <Space>
       <Switch 
       checked={show}
-      onChange={() => setShow(!show)}
+      onChange={() => {
+        setShow(!show)
+        setNotification(!show)
+        }
+      }
       checkedChildren="更新"
       unCheckedChildren="不更新"
        />
-      <Badge count={show ? 11 : 0} showZero color="#faad14" />
-      <Badge count={show ? 25 : 0} />
       <Badge
         count={
-          show ? (
-            <ClockCircleOutlined
-              style={{
-                color: '#f5222d',
-              }}
-            />
-          ) : (
-            0
-          )
+            <UpdateSelect />
         }
+      />
+      <Badge count={show ? updateTimeWarnCount : 0}  
+        color={(show && updateTimeWarnCount)? "#faad14" : ""}
+        overflowCount={999} 
+      />
+      <Badge 
+        count={show ? updateTimeErrorCount : 0}
+        overflowCount={999} 
       />
       <Badge
         className="site-badge-count-109"
-        count={show ? 109 : 0}
+        count={show ? updateTimeNormalCount : 0}
         style={{
           backgroundColor: '#52c41a',
         }}
+        overflowCount={99999}
       />
     </Space>
   );
 };
+
+const items = [
+  {
+    label: '5秒',
+    key: '0'
+  },
+  {
+    label: '15秒',
+    key: '1',
+  },
+  {
+    label: '1分钟',
+    key: '2',
+  },
+  {
+    label: '5分钟',
+    key: '3'
+  },
+  {
+    label: '15分钟',
+    key: '4',
+  },
+  {
+    label: '30分钟',
+    key: '5',
+  },
+  {
+    label: '3小时',
+    key: '6',
+  },
+  {
+    label: '12小时',
+    key: '7',
+  },
+  {
+    label: '24小时',
+    key: '8'
+  }
+];
+
+const UpdateSelect = () => {
+  const { setUpdateTime} = useContext(LogContext);
+  const updateTimeSelect = (key) =>  {
+    const second = 1000;
+    const minute = 60 * second;
+    const hour = 60 * minute;
+    if (key === 0) {
+      setUpdateTime(5 * second)   
+    } else if (key === 1) {
+      setUpdateTime(15 * second)
+    } else if (key === 2){
+      setUpdateTime(minute)
+    } else if (key === 3) {
+      setUpdateTime(5 * minute)
+    } else if (key === 4) {
+      setUpdateTime(15 * minute)
+    } else if (key === 5) {
+      setUpdateTime(30 * minute)
+    } else if (key === 6) {
+      setUpdateTime(3 * hour)
+    } else if (key === 7) {
+      setUpdateTime(12 * hour)
+    } else if (key === 8){
+      setUpdateTime(24 * hour)
+    }
+  }
+  return(
+  <Dropdown
+    menu={{
+      items,
+      selectable:true,
+      defaultSelectedKeys:['0'],
+      onClick: ({ key }) => {
+        updateTimeSelect(parseInt(key))
+      },
+    }}
+    trigger={['click']}
+  >
+    <a onClick={(e) => e.preventDefault()}>
+      <Space>
+        <ClockCircleOutlined
+          style={{
+            color: '#f5222d',
+          }}
+        />
+        <DownOutlined />
+      </Space>
+    </a>
+  </Dropdown>
+) ;
+}
+
   
-  export default TimeSelect;
+export default TimeSelect;
   

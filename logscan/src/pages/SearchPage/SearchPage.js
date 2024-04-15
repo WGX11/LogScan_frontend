@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Layout } from "antd";
-import Navigation from "../../component/Navigation";
 import TimeSelect from "../../component/TimeSelect";
 import "../../index.css";
 import DragDropDemo from "./DraggableBox";
@@ -9,17 +8,33 @@ import axios from "axios";
 import { formatISO } from "date-fns";
 import dayjs from "dayjs";
 import SerarchInputBox from "../../component/SearchInputBox";
+import AnomalyNotification from "./AnomalyNotification";
 
 
-const { Header, Content, Footer} = Layout;
+const { Content } = Layout;
 
 // 状态提升共享查询到的日志数据
 
 const SearchPage = () => {
+    //日志详情数据
     const [logData, setLogData] = useState({})
+    //Lucene表达式
     const [luceneString, setLuceneString] = useState('')
+    //查询时间
     const [startTime, setStartTime] = useState(dayjs().subtract(15, 'minute').format('YYYY-MM-DD HH:mm:ss') )
-    const [endTime, setEndTime] = useState(dayjs().format('YYYY-MM-DD HH:mm:ss') )
+    const [endTime, setEndTime] = useState(dayjs().format('YYYY-MM-DD HH:mm:ss'))
+    //报警数据
+    const [notificationData, setNotificationData] = useState([{}])
+    //是否显示报警
+    const [notification, setNotification] = useState(false)
+    //更新的时间间隔
+    const [updateTime, setUpdateTime] = useState(5000)
+    //更新时间段收到的异常日志数量
+    const [updateTimeErrorCount, setUpdateTimeErrorCount] = useState(0)
+    //更新时间段收到的警告日志数量
+    const [updateTimeWarnCount, setUpdateTimeWarnCount] = useState(0)
+    //更新时间段收到的正常日志数量
+    const [updateTimeNormalCount, setUpdateTimeNormalCount] = useState(0)
     useEffect(() => {
         const fetchData = async () => {
             const startTime_ = formatISO(startTime)
@@ -43,10 +58,11 @@ const SearchPage = () => {
     return (
         <div>
             <Layout>
-                <Header style={{backgroundColor:'aliceblue'}}>
-                    <Navigation/>
-                </Header>
-                <LogContext.Provider value={{logData, setStartTime, setEndTime, startTime, endTime, luceneString, setLuceneString}}>
+                <LogContext.Provider value={{logData, setStartTime, setEndTime, startTime,
+                     endTime, luceneString, setLuceneString, setNotification, notification, 
+                     setNotificationData, notificationData, updateTimeErrorCount, 
+                     setUpdateTimeErrorCount, updateTimeNormalCount, setUpdateTimeNormalCount, 
+                     updateTimeWarnCount, setUpdateTimeWarnCount, updateTime, setUpdateTime }}>
                     <Content style={{padding: '0 20px'}}>
                         <div className='content-box-vertical' style={{height:'320px'}}>
                             <div className='content-box-no-bg' style={{height:'200px', marginTop:'0px'}}>
@@ -56,6 +72,7 @@ const SearchPage = () => {
                                 <SerarchInputBox/>
                             </div>
                         </div>
+                        {notification && <AnomalyNotification/>}
                         <DragDropDemo/>
                     </Content>
                 </LogContext.Provider>

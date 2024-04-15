@@ -76,6 +76,7 @@ const Navigation = () => {
       selectedKeys={[current]} 
       mode="horizontal" 
       items={items} 
+
       style={{
         flex: 1,
         minWidth: 0,

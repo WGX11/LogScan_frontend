@@ -4,13 +4,12 @@
     justify-self: space-between;
     align-items: center;
     justify-content: 'flex-start';
-    background-color: aliceblue;
+    background-color: white;
     margin: 20px; 
     padding: 20px; 
     border-radius: 15px; 
     border: 1px solid #ccc; /* 边框颜色和宽度 */
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加阴影效果 */
-    background-color: #fff; /* 背景颜色 */
     position: relative;
 }
 /* 垂直布局 */
@@ -20,13 +19,13 @@
     justify-self: space-between;
     align-items: left;
     justify-content: 'flex-start';
-    background-color: aliceblue;
+    background-color: white;
     margin: 20px; 
     padding: 20px; 
     border-radius: 15px; 
     border: 1px solid #ccc; /* 边框颜色和宽度 */
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 添加阴影效果 */
-    background-color: #fff; /* 背景颜色 */
+
     position: relative;
 }
 

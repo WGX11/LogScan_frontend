@@ -1,48 +1,35 @@
-.breathing-light {
-  width: 100px;
-  height: 100px;
-  background-color: rgba(255, 0, 0, 0.5); /* 初始透明度 */
-  border-radius: 50%;
-  animation: breathe 3s infinite ease-in-out;
-  position: relative;
-}
-
-/* 动画同时包括背景色和光晕效果的透明度变化 */
-@keyframes breathe{
-  0%, 100% {
-    box-shadow: 0 0 20px 10px rgba(255, 0, 0, 0.5);
-    background-color: rgba(243, 49, 49, 0.5); /* 与光晕同步 */
-  }
-  50% {
-    box-shadow: 0 0 40px 20px rgba(255, 0, 0, 0.2);
-    background-color: rgba(247, 27, 27, 0.8); /* 中心和光晕同时变得更透明 */
-  }
-}
-
-
-.app_breathing_light{
+.app{
   width:100%;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
 }
-.span_breathting_light{
-  width: 60px;
-  height: 60px;
-  margin: 40px;
-  border-radius: 10%;
+.light{
+  width: 80px;
+  height: 80px;
+  margin: 20px;
+  border-radius: 20%;
+  display: flex;        
+  justify-content: center; /* 水平居中 */
+  align-items: center;  /* 垂直居中 */
+  padding: 2px;        /* 防止内容紧贴边缘 */
+  box-sizing: border-box; /* 包括padding在内的宽高计算 */
+}
+  
+.light:hover {
+  transform: translateY(-5px); /* 鼠标悬停时上移 */
 }
 .red{
   animation: just1 2s ease-in-out infinite alternate;
 }
 .green{
-  animation: just2 4s ease-in-out infinite alternate;
+  animation: just2 3s ease-in-out infinite alternate;
 }
 .blue{
-  animation: just3 1s ease-in-out infinite alternate;
+  animation: just3 4s ease-in-out infinite alternate;
 }
+
 @keyframes just1{
   0%{
     border: 5px solid rgba(255,0,0,0);
@@ -55,15 +42,11 @@
 }
 @keyframes just2{
   0%{
-    border: 5px out rgba(0,255,0,0);
-    border-width: 5px;
-    background-color: rgba(0,255,0,0.4);
+    border: 5px solid rgba(0,255,0,0);
     box-shadow: 0 0 0 rgba(0,255,0,0),0 0 0 rgba(0,255,0,0) inset;
   }
-  
   100%{
-    border: 5px out rgba(0,255,0,1);
-    background-color: rgba(0,255,0,1);
+    border: 5px solid rgba(0,255,0,1);
     box-shadow: 0 0 70px rgba(0,255,0,0.7),0 0 15px rgba(0,255,0,0.5) inset;
   }
 }
@@ -76,4 +59,46 @@
     border: 5px solid rgb(255, 251, 0);
     box-shadow: 0 0 70px rgba(255,251, 0,0.7),0 0 15px rgba(255,251,0,0.5) inset;
   }
+}
+
+.right-half {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%; 
+}
+
+.right-half > .ant-row {
+  width: 75%; /* 使Row只占据其容器的3/4宽度 */
+}
+
+
+.artistic-text {
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif; /* 可以选择任何合适的字体 */
+  color: white; /* 文字颜色 */
+  max-width: 100%; 
+  word-wrap: break-word;
+  line-height: 1.2;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),  /* 外发光 */
+               0 0 20px rgba(255, 255, 255, 0.6),  /* 更大范围的发光 */
+               0 0 30px rgba(255, 255, 255, 0.4),  /* 更大范围的发光 */
+               0 0 40px rgba(255, 255, 255, 0.2);  /* 最大范围的发光 */
+}
+
+.display-pagination-container  .ant-pagination-item,
+.display-pagination-container  .ant-pagination-item-link {
+  color: white !important; 
+  border-color: white !important; 
+}
+
+.display-pagination-container  .ant-pagination-item,
+.display-pagination-container  .ant-pagination-item-active {
+  background: aliceblue !important; 
+  border-color: white !important; 
+} 
+
+.display-pagination-container  .ant-pagination-item-link:hover {
+  background: rgb(180, 219, 251) !important; 
+  border-color: white !important; 
 }

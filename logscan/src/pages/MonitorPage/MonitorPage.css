@@ -1,0 +1,31 @@
+.dark-gradient-background {
+    background: black; 
+    overflow: hidden;
+  }
+
+.content-box-monitor{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: aliceblue; /* 浅色背景以与黑色背景形成对比 */
+    margin: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #ccc; 
+    box-shadow: 
+        0 8px 16px rgba(173, 216, 230, 0.45), 
+        0 16px 32px rgba(173, 216, 230, 0.35), 
+        0 20px 40px rgba(173, 216, 230, 0.25); 
+    position: relative;
+
+}
+
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+
+ 
