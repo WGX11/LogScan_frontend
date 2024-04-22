@@ -4,6 +4,7 @@ import App from './App';
 import dayjs from 'dayjs';
 import 'dayjs/esm/locale/zh-cn';
 import BreathingLight from './component/BreathingLight';
+import { BrowserRouter } from 'react-router-dom';
 
 dayjs.locale('zh-cn');
 

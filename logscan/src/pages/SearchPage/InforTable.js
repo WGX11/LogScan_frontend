@@ -88,12 +88,12 @@ const InforTable = () => {
     }
     const dataTmp = logDataArray.map((_, index) => {
       return {
-        message: logDataArray[index]._source.message,
-        timeStamps: logDataArray[index]._source['@timestamp'],
-        host: logDataArray[index]._source.host,
-        level: logDataArray[index]._source.level,
-        key: logDataArray[index]._id,
-        status: logDataArray[index]._source.level === 'Normal' ? 'Normal' : 'Error',
+        message: logDataArray[index].message,
+        timeStamps: logDataArray[index]['@timestamp'],
+        host: logDataArray[index].host,
+        level: logDataArray[index].level,
+        key: index,
+        status: logDataArray[index].level === 'Normal' ? 'Normal' : 'Error',
       }
     })
     setData(dataTmp)

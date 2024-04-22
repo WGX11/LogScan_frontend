@@ -1,67 +1,50 @@
-import React, { useState } from 'react';
-import { PlusSquareOutlined, SearchOutlined, AlertOutlined, EyeOutlined, UserOutlined,} from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { PlusSquareOutlined, SearchOutlined, AlertOutlined, EyeOutlined, UserOutlined, TeamOutlined } from '@ant-design/icons';
 import { Menu, Layout, Button} from 'antd';
 import logo from '../assets/logo.jpg';
 import './Navigation.css';
+
+
 const { Header} = Layout;
 const items = [
   {
     label: '搜索',
-    key: 'mail',
+    key: '/search',
     icon: <SearchOutlined />,
   },
   {
     label: '输入',
-    key: 'app',
+    key: '/input',
     icon: <PlusSquareOutlined />,
   },
   {
     label: '警报',
-    key: 'SubMenu',
+    key: '/alert',
     icon: <AlertOutlined />,
-    children: [
-      {
-        type: 'group',
-        label: 'Item 1',
-        children: [
-          {
-            label: 'Option 1',
-            key: 'setting:1',
-          },
-          {
-            label: 'Option 2',
-            key: 'setting:2',
-          },
-        ],
-      },
-      {
-        type: 'group',
-        label: 'Item 2',
-        children: [
-          {
-            label: 'Option 3',
-            key: 'setting:3',
-          },
-          {
-            label: 'Option 4',
-            key: 'setting:4',
-          },
-        ],
-      },
-    ],
   },
   {
     label: '监控面板',
-    key: 'monitor',
+    key: '/monitor',
     icon: <EyeOutlined />,
   },
-  
+  {
+    label: '论坛',
+    key: '/forum',
+    icon: <TeamOutlined />,
+  }
 ];
 const Navigation = () => {
-  const [current, setCurrent] = useState('mail');
+  const [current, setCurrent] = useState('/')
+  const navigator = useNavigate()
+  const location = useLocation(); 
+  useEffect(() => {
+    setCurrent(location.pathname)
+  }
+  , [location])
   const onClick = (e) => {
-    console.log('click ', e);
-    setCurrent(e.key);
+    setCurrent(e.key)
+    navigator(e.key)
   };
   return (
     <Header

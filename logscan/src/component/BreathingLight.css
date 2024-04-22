@@ -21,13 +21,13 @@
   transform: translateY(-5px); /* 鼠标悬停时上移 */
 }
 .red{
-  animation: just1 2s ease-in-out infinite alternate;
+  animation: just1 0.5s ease-in-out infinite alternate;
 }
 .green{
-  animation: just2 3s ease-in-out infinite alternate;
+  animation: just2 4s ease-in-out infinite alternate;
 }
-.blue{
-  animation: just3 4s ease-in-out infinite alternate;
+.yellow{
+  animation: just3 2s ease-in-out infinite alternate;
 }
 
 @keyframes just1{
@@ -68,7 +68,7 @@
 }
 
 .right-half > .ant-row {
-  width: 75%; /* 使Row只占据其容器的3/4宽度 */
+  width: 95%; /* 使Row只占据其容器的一部分宽度 */
 }
 
 
@@ -101,4 +101,13 @@
 .display-pagination-container  .ant-pagination-item-link:hover {
   background: rgb(180, 219, 251) !important; 
   border-color: white !important; 
+}
+
+.breathing-light-selector {
+  background-color: #000 !important; /* 黑色背景 */
+}
+
+.breathing-light-selector .ant-select-selector {
+  background-color: #000 !important; /* 确保下拉选择器也有同样的背景色 */
+  color: #fff !important; /* 设置文本颜色为白色以保证可读性 */
 }

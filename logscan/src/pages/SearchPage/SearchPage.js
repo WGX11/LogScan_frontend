@@ -5,24 +5,41 @@ import "../../index.css";
 import DragDropDemo from "./DraggableBox";
 import LogContext from "./LogContext";
 import axios from "axios";
-import { formatISO } from "date-fns";
+import { formatISO, parseISO } from "date-fns";
 import dayjs from "dayjs";
 import SerarchInputBox from "../../component/SearchInputBox";
 import AnomalyNotification from "./AnomalyNotification";
-
+import {useLocation} from 'react-router-dom';
 
 const { Content } = Layout;
 
 // 状态提升共享查询到的日志数据
 
 const SearchPage = () => {
+    const location = useLocation()
+    let queryParams = new URLSearchParams(location.search);
+    let defaultStartTime = dayjs().subtract(15, 'minute').format('YYYY-MM-DD HH:mm:ss')
+    let defaultEndTime = dayjs().format('YYYY-MM-DD HH:mm:ss')
+    let defaultLucene = ''
+    let st = queryParams.get('start') || defaultStartTime
+    let et = queryParams.get('end') || defaultEndTime
+    let lu = queryParams.get('lucene') || defaultLucene
+    if (st) {
+        st = decodeURIComponent(st) 
+    }
+    if (et) {
+        et = decodeURIComponent(et)
+    }
+    if (lu) {
+        lu = decodeURIComponent(lu)
+    }
     //日志详情数据
     const [logData, setLogData] = useState({})
     //Lucene表达式
-    const [luceneString, setLuceneString] = useState('')
+    const [luceneString, setLuceneString] = useState(lu)
     //查询时间
-    const [startTime, setStartTime] = useState(dayjs().subtract(15, 'minute').format('YYYY-MM-DD HH:mm:ss') )
-    const [endTime, setEndTime] = useState(dayjs().format('YYYY-MM-DD HH:mm:ss'))
+    const [startTime, setStartTime] = useState(st)
+    const [endTime, setEndTime] = useState(et)
     //报警数据
     const [notificationData, setNotificationData] = useState([{}])
     //是否显示报警
@@ -37,8 +54,18 @@ const SearchPage = () => {
     const [updateTimeNormalCount, setUpdateTimeNormalCount] = useState(0)
     useEffect(() => {
         const fetchData = async () => {
-            const startTime_ = formatISO(startTime)
-            const endTime_ = formatISO(endTime)
+            let startTime_ = startTime
+            let endTime_ = endTime
+            try{
+                startTime_ = formatISO(startTime)
+            } catch (error) {
+                return
+            }
+            try{
+                endTime_ = formatISO(endTime)
+            }catch (error){
+                return 
+            }
             try{
                 const response = await axios.get("http://localhost:9031/searchData", {
                     params: {

@@ -119,8 +119,8 @@ const AbsolutePicker = (props) => {
     const [selectDate, setSelectDate] = useState([dayjs().subtract(15, 'minute'), dayjs()])
     const handleRangeChange = (date) => {
       setSelectDate(date);
-      let start = date[0].format('YYYY-MM-DD HH:mm:ss');
-      let end = date[1].format('YYYY-MM-DD HH:mm:ss');
+      let start = date[0].format('YYYY-MM-DDTHH:mm:ssZ');
+      let end = date[1].format('YYYY-MM-DDTHH:mm:ssZ');
       setTmpStartTime(start);
       setTmpEndTime(end);
       setTimeValid(true);
@@ -140,8 +140,8 @@ const AbsoluteWrite = (props) => {
     const { tmpStartTime, tmpEndTime, setTmpStartTime, setTmpEndTime } = props;
     const setTimeValid = props.setTimeValid;
     const setEndTime = () => {
-      setTmpEndTime(dayjs().format('YYYY-MM-DD HH:mm:ss'));
-      checkTime(dayjs().format('YYYY-MM-DD HH:mm:ss'));
+      setTmpEndTime(dayjs().format('YYYY-MM-DDTHH:mm:ssZ'));
+      checkTime(dayjs().format('YYYY-MM-DDTHH:mm:ssZ'));
       if (checkTime(tmpStartTime)) {
         setTimeValid(true);
         setInputValid(true);
@@ -151,8 +151,8 @@ const AbsoluteWrite = (props) => {
       }
     }
     const setStartTime = () => {
-      setTmpStartTime(dayjs().format('YYYY-MM-DD HH:mm:ss'));
-      checkTime(dayjs().format('YYYY-MM-DD HH:mm:ss'));
+      setTmpStartTime(dayjs().format('YYYY-MM-DDTHH:mm:ssZ'));
+      checkTime(dayjs().format('YYYY-MM-DDTHH:mm:ssZ'));
       if (checkTime(tmpEndTime)) {
         setTimeValid(true);
         setInputValid(true);
@@ -182,7 +182,7 @@ const AbsoluteWrite = (props) => {
       }
     }
     const checkTime = (time) => {
-      if (dayjs(time, 'YYYY-MM-DD HH:mm:ss', true).isValid() || dayjs(time, 'YYYY-MM-DD', true).isValid()) {
+      if (dayjs(time, 'YYYY-MM-DDTHH:mm:ssZ', true).isValid() || dayjs(time, 'YYYY-MM-DD', true).isValid()) {
         return true
       } else {
         return false
@@ -222,33 +222,33 @@ const AbsoluteWrite = (props) => {
 const RelativePicker = (props) => {
   const { setTmpStartTime, setTmpEndTime, setTimeValid } = props;
   const handleChange = (value) => {
-    setTmpEndTime(dayjs().format('YYYY-MM-DD HH:mm:ss'));
+    setTmpEndTime(dayjs().format('YYYY-MM-DDTHH:mm:ssZ'));
     if (value === 'all') {
-      setTmpStartTime(dayjs().subtract(30, 'year').format('YYYY-MM-DD HH:mm:ss'));
+      setTmpStartTime(dayjs().subtract(30, 'year').format('YYYY-MM-DDTHH:mm:ssZ'));
     } else if (value === '30d') {
-      setTmpStartTime(dayjs().subtract(30, 'day').format('YYYY-MM-DD HH:mm:ss'));
+      setTmpStartTime(dayjs().subtract(30, 'day').format('YYYY-MM-DDTHH:mm:ssZ'));
     } else if (value === '14d') {
-      setTmpStartTime(dayjs().subtract(14, 'day').format('YYYY-MM-DD HH:mm:ss'));
+      setTmpStartTime(dayjs().subtract(14, 'day').format('YYYY-MM-DDTHH:mm:ssZ'));
     } else if (value === '7d') {
-      setTmpStartTime(dayjs().subtract(7, 'day').format('YYYY-MM-DD HH:mm:ss'));
+      setTmpStartTime(dayjs().subtract(7, 'day').format('YYYY-MM-DDTHH:mm:ssZ'));
     } else if (value === '3d') {
-      setTmpStartTime(dayjs().subtract(3, 'day').format('YYYY-MM-DD HH:mm:ss'));
+      setTmpStartTime(dayjs().subtract(3, 'day').format('YYYY-MM-DDTHH:mm:ssZ'));
     } else if (value === '1d') {
-      setTmpStartTime(dayjs().subtract(1, 'day').format('YYYY-MM-DD HH:mm:ss'));
+      setTmpStartTime(dayjs().subtract(1, 'day').format('YYYY-MM-DDTHH:mm:ssZ'));
     } else if (value === '12h') {
-      setTmpStartTime(dayjs().subtract(12, 'hour').format('YYYY-MM-DD HH:mm:ss'));
+      setTmpStartTime(dayjs().subtract(12, 'hour').format('YYYY-MM-DDTHH:mm:ssZ'));
     } else if (value === '6h') {
-      setTmpStartTime(dayjs().subtract(6, 'hour').format('YYYY-MM-DD HH:mm:ss'));
+      setTmpStartTime(dayjs().subtract(6, 'hour').format('YYYY-MM-DDTHH:mm:ssZ'));
     } else if (value === '3h') {
-      setTmpStartTime(dayjs().subtract(3, 'hour').format('YYYY-MM-DD HH:mm:ss'));
+      setTmpStartTime(dayjs().subtract(3, 'hour').format('YYYY-MM-DDTHH:mm:ssZ'));
     } else if (value === '1h') {
-      setTmpStartTime(dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm:ss'));
+      setTmpStartTime(dayjs().subtract(1, 'hour').format('YYYY-MM-DDTHH:mm:ssZ'));
     } else if (value === '30m') {
-      setTmpStartTime(dayjs().subtract(30, 'minute').format('YYYY-MM-DD HH:mm:ss'));
+      setTmpStartTime(dayjs().subtract(30, 'minute').format('YYYY-MM-DDTHH:mm:ssZ'));
     } else if (value === '15m') {
-      setTmpStartTime(dayjs().subtract(15, 'minute').format('YYYY-MM-DD HH:mm:ss'));
+      setTmpStartTime(dayjs().subtract(15, 'minute').format('YYYY-MM-DDTHH:mm:ssZ'));
     } else if (value === '5m') {
-      setTmpStartTime(dayjs().subtract(5, 'minute').format('YYYY-MM-DD HH:mm:ss'));
+      setTmpStartTime(dayjs().subtract(5, 'minute').format('YYYY-MM-DDTHH:mm:ssZ'));
     } 
     setTimeValid(true)
   };

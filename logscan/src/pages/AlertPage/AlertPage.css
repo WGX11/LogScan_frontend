@@ -1,0 +1,19 @@
+.scrollable-area {
+    height: 400px;
+    overflow: scroll;
+    border: 1px solid #ccc;
+    margin: 20px 20px 20px 20px;
+
+}
+  
+  
+
+  .scrollable-area::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .scrollable-area::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 10px;
+  }
+  
